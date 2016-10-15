@@ -21,7 +21,16 @@ func (r *Ring) search(key string) int {
     /////////////////////////
     // YOUR CODE GOES HERE //
     /////////////////////////
-
+    //calcula o hash da chave key
+    keyHash := hashId(key)
+    //percorre o anel de nodes a partir do início até encontrar o primeiro node
+    //que tem HashId maior do que o hash da chave
+    for i, node := range r.Nodes {
+      if node.HashId > keyHash {
+        return i
+      }
+    }
+    //Se percorreu todo o range retorna o primeiro node
     return 0
 }
 

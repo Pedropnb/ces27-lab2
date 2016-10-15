@@ -101,10 +101,12 @@ func (console *Console) Run() {
 		case "print":
 			w := tabwriter.NewWriter(os.Stdout, 5, 0, 1, '_', tabwriter.Debug)
 
-			cacheMap, cacheTimestamps := console.cache.getAll()
+			//codigo abaixo alterado devido a mudanca na estrutura de dados do cache
+			//que incluiu o timestamp
+			cacheMap:= console.cache.getAll()
 			fmt.Fprintf(w, "[CONSOLE] KEY\tVALUE\tTIMESTAMP\t\n")
-			for key, value := range cacheMap {
-				fmt.Fprintf(w, "[CONSOLE] '%v'\t'%v'\t%v\t\n", key, value, cacheTimestamps[key])
+			for key, dado := range cacheMap {
+				fmt.Fprintf(w, "[CONSOLE] '%v'\t'%v'\t%v\t\n", key, dado.valor, dado.timestamp)
 			}
 			w.Flush()
 
